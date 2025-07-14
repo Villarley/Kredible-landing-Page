@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   ArrowRight,
   CheckCircle,
@@ -20,58 +20,58 @@ import {
   Sparkles,
   Database,
   Lock,
-} from "lucide-react"
-import Link from "next/link"
+} from "lucide-react";
+import Link from "next/link";
 
 export default function BuilderScoreLanding() {
-  const [scrollY, setScrollY] = useState(0)
-  const [heroScale, setHeroScale] = useState(1)
-  const [heroOpacity, setHeroOpacity] = useState(1)
-  const heroRef = useRef<HTMLElement>(null)
+  const [scrollY, setScrollY] = useState(0);
+  const [heroScale, setHeroScale] = useState(1);
+  const [heroOpacity, setHeroOpacity] = useState(1);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      setScrollY(currentScrollY)
+      const currentScrollY = window.scrollY;
+      setScrollY(currentScrollY);
 
       // Hero scaling and fading effect
       if (heroRef.current) {
-        const heroHeight = heroRef.current.offsetHeight
-        const scrollProgress = Math.min(currentScrollY / heroHeight, 1)
+        const heroHeight = heroRef.current.offsetHeight;
+        const scrollProgress = Math.min(currentScrollY / heroHeight, 1);
 
         // Scale from 1 to 0.8 as user scrolls
-        const newScale = 1 - scrollProgress * 0.2
-        setHeroScale(Math.max(newScale, 0.8))
+        const newScale = 1 - scrollProgress * 0.2;
+        setHeroScale(Math.max(newScale, 0.8));
 
         // Fade from 1 to 0.3 as user scrolls
-        const newOpacity = 1 - scrollProgress * 0.7
-        setHeroOpacity(Math.max(newOpacity, 0.3))
+        const newOpacity = 1 - scrollProgress * 0.7;
+        setHeroOpacity(Math.max(newOpacity, 0.3));
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const observerOptions = {
       threshold: 0.1,
       rootMargin: "0px 0px -50px 0px",
-    }
+    };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("animate-in")
+          entry.target.classList.add("animate-in");
         }
-      })
-    }, observerOptions)
+      });
+    }, observerOptions);
 
-    const animatedElements = document.querySelectorAll(".animate-on-scroll")
-    animatedElements.forEach((el) => observer.observe(el))
+    const animatedElements = document.querySelectorAll(".animate-on-scroll");
+    animatedElements.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-[#0a0f1f] via-[#0f1629] to-[#1a1f3a] text-white overflow-x-hidden">
@@ -87,31 +87,48 @@ export default function BuilderScoreLanding() {
       {/* Header */}
       <header className="px-4 lg:px-6 h-16 flex items-center border-b border-gray-800/50 bg-[#0a0f1f]/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="flex items-center justify-center">
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center">
-            <img src="/Kredible.png" alt="Builder Score Logo" className="h-6 w-6" />
+          <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-lg flex items-center justify-center">
+            <img
+              src="/kredible-white.jpg"
+              alt="Kredible Logo"
+              className="h-8 w-8"
+            />
           </div>
           <span className="ml-2 text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-            Builder Score
+            Kredible
           </span>
         </div>
         <nav className="ml-auto flex gap-4 sm:gap-6 items-center">
-          <Link href="#demo" className="text-sm font-medium hover:text-blue-400 transition-colors duration-300">
+          <Link
+            href="#demo"
+            className="text-sm font-medium hover:text-blue-400 transition-colors duration-300"
+          >
             Demo
           </Link>
-          <Link href="#api" className="text-sm font-medium hover:text-blue-400 transition-colors duration-300">
+          <Link
+            href="#api"
+            className="text-sm font-medium hover:text-blue-400 transition-colors duration-300"
+          >
             API
           </Link>
-          <Link href="#contact" className="text-sm font-medium hover:text-blue-400 transition-colors duration-300">
-            Contact
-          </Link>
+          <a
+            href="https://github.com/Kredible-Inc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm font-medium hover:text-blue-400 transition-colors duration-300"
+          >
+            GitHub
+          </a>
         </nav>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 flex flex-col items-center justify-center w-full">
+        {" "}
+        {/* Centrado global */}
         {/* Hero Section */}
         <section
           ref={heroRef}
-          className="relative w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-br from-[#0a0f1f] via-[#1e3a8a] to-[#1e90ff] overflow-hidden transition-all duration-300"
+          className="relative w-full flex flex-col items-center justify-center py-12 md:py-24 lg:py-32 xl:py-48 bg-gradient-to-br from-[#0a0f1f] via-[#1e3a8a] to-[#1e90ff] overflow-hidden transition-all duration-300"
         >
           {/* Parallax Background Elements */}
           <div
@@ -125,7 +142,7 @@ export default function BuilderScoreLanding() {
             <div className="absolute top-1/2 left-1/2 w-64 h-64 border border-blue-500/10 rounded-full transform -translate-x-1/2 -translate-y-1/2"></div>
           </div>
 
-          <div className="container px-4 md:px-6 relative z-10">
+          <div className="container px-4 md:px-6 relative z-10 flex flex-col items-center justify-center">
             <div
               className="flex flex-col items-center space-y-6 text-center transition-all duration-500 ease-out"
               style={{
@@ -133,7 +150,10 @@ export default function BuilderScoreLanding() {
                 opacity: heroOpacity,
               }}
             >
-              <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 border-blue-500/30 animate-pulse">
+              <Badge
+                variant="secondary"
+                className="bg-blue-600/20 text-blue-300 border-blue-500/30 animate-pulse"
+              >
                 <Sparkles className="w-4 h-4 mr-2" />
                 Web3 Credit Revolution
               </Badge>
@@ -155,25 +175,26 @@ export default function BuilderScoreLanding() {
               </div>
 
               <div className="flex flex-col gap-4 min-[400px]:flex-row animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 delay-300">
-                <Button
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300"
+                <a
+                  href="#demo"
+                  className="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-300 rounded-lg px-8 py-3 text-lg font-semibold flex items-center justify-center"
                 >
                   Try the Demo
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-blue-400/50 text-blue-300 hover:bg-blue-500/10 hover:border-blue-400 hover:scale-105 transition-all duration-300 bg-transparent"
+                </a>
+                <a
+                  href="https://api-kredible-production.up.railway.app/api/#/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="border-blue-400/50 text-blue-300 hover:bg-blue-500/10 hover:border-blue-400 hover:scale-105 transition-all duration-300 bg-transparent border rounded-lg px-8 py-3 text-lg font-semibold flex items-center justify-center"
                 >
-                  Explore the API
-                </Button>
+                  See our API
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
               </div>
             </div>
           </div>
         </section>
-
         {/* Problem Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 relative bg-gradient-to-b from-[#1e90ff]/5 to-transparent">
           <div className="container px-4 md:px-6">
@@ -219,7 +240,9 @@ export default function BuilderScoreLanding() {
                         <div className="w-10 h-10 bg-red-500/20 rounded-lg flex items-center justify-center">
                           <item.icon className="h-5 w-5 text-red-400" />
                         </div>
-                        <span className="font-semibold text-red-300">{item.title}</span>
+                        <span className="font-semibold text-red-300">
+                          {item.title}
+                        </span>
                       </div>
                       <p className="text-gray-300">{item.desc}</p>
                     </CardContent>
@@ -229,7 +252,6 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* Solution Section */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-[#0a0f1f]/80 to-[#1a1f3a]/80">
           <div className="container px-4 md:px-6">
@@ -243,8 +265,8 @@ export default function BuilderScoreLanding() {
               </h2>
 
               <p className="mx-auto max-w-[800px] text-gray-300 text-lg animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 delay-200">
-                A transparent, Web3-native credit score built from your on-chain actions—repayments, wallet activity,
-                and behavior.
+                A transparent, Web3-native credit score built from your on-chain
+                actions—repayments, wallet activity, and behavior.
               </p>
 
               <div className="grid gap-8 lg:grid-cols-3 lg:gap-12 max-w-5xl mt-12">
@@ -288,7 +310,6 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* How it Works */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-transparent to-[#0a0f1f]/50">
           <div className="container px-4 md:px-6">
@@ -311,13 +332,36 @@ export default function BuilderScoreLanding() {
                 <div className="hidden md:block relative">
                   <div className="flex items-center justify-between w-full mx-auto">
                     {[
-                      { icon: DollarSign, label: "Borrow", color: "from-blue-400 to-blue-600" },
-                      { icon: CheckCircle, label: "Repay", color: "from-green-400 to-green-600" },
-                      { icon: TrendingUp, label: "Score grows", color: "from-purple-400 to-purple-600" },
-                      { icon: Target, label: "Lower LTV", color: "from-cyan-400 to-cyan-600" },
-                      { icon: Repeat, label: "Repeat", color: "from-orange-400 to-orange-600" },
+                      {
+                        icon: DollarSign,
+                        label: "Borrow",
+                        color: "from-blue-400 to-blue-600",
+                      },
+                      {
+                        icon: CheckCircle,
+                        label: "Repay",
+                        color: "from-green-400 to-green-600",
+                      },
+                      {
+                        icon: TrendingUp,
+                        label: "Score grows",
+                        color: "from-purple-400 to-purple-600",
+                      },
+                      {
+                        icon: Target,
+                        label: "Lower LTV",
+                        color: "from-cyan-400 to-cyan-600",
+                      },
+                      {
+                        icon: Repeat,
+                        label: "Repeat",
+                        color: "from-orange-400 to-orange-600",
+                      },
                     ].map((step, index) => (
-                      <div key={index} className="flex flex-col items-center group relative">
+                      <div
+                        key={index}
+                        className="flex flex-col items-center group relative"
+                      >
                         <div
                           className={`w-20 h-20 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center mb-4 group-hover:scale-125 transition-all duration-500 shadow-lg hover:shadow-2xl z-10 relative`}
                         >
@@ -326,8 +370,6 @@ export default function BuilderScoreLanding() {
                         <span className="text-lg font-medium text-blue-300 group-hover:text-white transition-colors duration-300">
                           {step.label}
                         </span>
-
-                        
                       </div>
                     ))}
                   </div>
@@ -336,13 +378,36 @@ export default function BuilderScoreLanding() {
                 {/* Mobile Timeline */}
                 <div className="md:hidden space-y-8">
                   {[
-                    { icon: DollarSign, label: "Borrow", color: "from-blue-400 to-blue-600" },
-                    { icon: CheckCircle, label: "Repay", color: "from-green-400 to-green-600" },
-                    { icon: TrendingUp, label: "Score Increases", color: "from-purple-400 to-purple-600" },
-                    { icon: Target, label: "Lower LTV", color: "from-cyan-400 to-cyan-600" },
-                    { icon: Repeat, label: "Repeat", color: "from-orange-400 to-orange-600" },
+                    {
+                      icon: DollarSign,
+                      label: "Borrow",
+                      color: "from-blue-400 to-blue-600",
+                    },
+                    {
+                      icon: CheckCircle,
+                      label: "Repay",
+                      color: "from-green-400 to-green-600",
+                    },
+                    {
+                      icon: TrendingUp,
+                      label: "Score Increases",
+                      color: "from-purple-400 to-purple-600",
+                    },
+                    {
+                      icon: Target,
+                      label: "Lower LTV",
+                      color: "from-cyan-400 to-cyan-600",
+                    },
+                    {
+                      icon: Repeat,
+                      label: "Repeat",
+                      color: "from-orange-400 to-orange-600",
+                    },
                   ].map((step, index) => (
-                    <div key={index} className="flex flex-col items-center group">
+                    <div
+                      key={index}
+                      className="flex flex-col items-center group"
+                    >
                       <div
                         className={`w-20 h-20 bg-gradient-to-r ${step.color} rounded-full flex items-center justify-center mb-4 group-hover:scale-125 transition-all duration-500 shadow-lg hover:shadow-2xl`}
                       >
@@ -351,7 +416,9 @@ export default function BuilderScoreLanding() {
                       <span className="text-lg font-medium text-blue-300 group-hover:text-white transition-colors duration-300">
                         {step.label}
                       </span>
-                      {index < 4 && <ArrowRight className="h-8 w-8 text-blue-400 mt-4 rotate-90 animate-pulse" />}
+                      {index < 4 && (
+                        <ArrowRight className="h-8 w-8 text-blue-400 mt-4 rotate-90 animate-pulse" />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -385,7 +452,9 @@ export default function BuilderScoreLanding() {
                       <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-lg flex items-center justify-center mx-auto">
                         <item.icon className="h-6 w-6 text-white" />
                       </div>
-                      <CardTitle className="text-center text-blue-300">{item.title}</CardTitle>
+                      <CardTitle className="text-center text-blue-300">
+                        {item.title}
+                      </CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-center text-gray-300">{item.desc}</p>
@@ -396,7 +465,6 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* Demo Platform Preview */}
         <section
           id="demo"
@@ -423,7 +491,8 @@ export default function BuilderScoreLanding() {
 
               <div className="animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 delay-200">
                 <p className="mx-auto max-w-[700px] text-blue-100 text-lg mb-8">
-                  We built a lightweight P2P lending demo to showcase Builder Score.
+                  We built a lightweight P2P lending demo to showcase Builder
+                  Score.
                 </p>
                 <p className="text-cyan-200 font-semibold text-xl">
                   Try it now and see your score evolve in real time.
@@ -440,10 +509,12 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* For Developers */}
-        <section id="api" className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-transparent to-[#0a0f1f]/30">
-          <div className="container px-4 md:px-6">
+        <section
+          id="api"
+          className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-transparent to-[#0a0f1f]/30 flex flex-col items-center justify-center"
+        >
+          <div className="container px-4 md:px-6 flex flex-col items-center justify-center">
             <div className="flex flex-col items-center space-y-8 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000">
                 Built with{" "}
@@ -496,18 +567,27 @@ export default function BuilderScoreLanding() {
                 </Card>
               </div>
 
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-purple-400/50 text-purple-300 hover:bg-purple-500/10 hover:border-purple-400 hover:scale-105 transition-all duration-300 animate-on-scroll opacity-0 translate-y-8 delay-400 bg-transparent"
+              <a
+                href="https://api-kredible-production.up.railway.app/api/#/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-purple-400/50 text-purple-300 hover:bg-purple-500/10 hover:border-purple-400 hover:scale-105 transition-all duration-300 animate-on-scroll opacity-0 translate-y-8 delay-400 bg-transparent border rounded-lg px-8 py-3 text-lg font-semibold flex items-center justify-center mt-4"
               >
                 Access API Docs
                 <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              </a>
+              <a
+                href="https://github.com/Kredible-Inc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border-gray-400/50 text-gray-300 hover:bg-gray-500/10 hover:border-gray-400 hover:scale-105 transition-all duration-300 animate-on-scroll opacity-0 translate-y-8 delay-400 bg-transparent border rounded-lg px-8 py-3 text-lg font-semibold flex items-center justify-center mt-4"
+              >
+                GitHub
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
             </div>
           </div>
         </section>
-
         {/* Pricing Model */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-[#0a0f1f]/90 via-[#1a1f3a]/90 to-[#0a0f1f]/90">
           <div className="container px-4 md:px-6">
@@ -555,7 +635,9 @@ export default function BuilderScoreLanding() {
                         <tier.icon className="h-8 w-8 text-white" />
                       </div>
                       <h3 className="font-bold text-xl mb-2">{tier.title}</h3>
-                      <p className="text-3xl font-bold text-blue-300 mb-4">{tier.price}</p>
+                      <p className="text-3xl font-bold text-blue-300 mb-4">
+                        {tier.price}
+                      </p>
                       <p className="text-gray-300">{tier.desc}</p>
                     </CardContent>
                   </Card>
@@ -564,14 +646,15 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* User Benefits */}
         <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-transparent to-[#0a0f1f]/50">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-8 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000">
                 Why Users{" "}
-                <span className="bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">Love</span>{" "}
+                <span className="bg-gradient-to-r from-pink-400 to-red-400 bg-clip-text text-transparent">
+                  Love
+                </span>{" "}
                 Builder Score
               </h2>
 
@@ -621,7 +704,6 @@ export default function BuilderScoreLanding() {
             </div>
           </div>
         </section>
-
         {/* Final CTA */}
         <section
           id="contact"
@@ -638,7 +720,8 @@ export default function BuilderScoreLanding() {
               </h2>
 
               <p className="mx-auto max-w-[600px] text-blue-100 text-lg animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 delay-200">
-                Join the future of decentralized credit and unlock better lending opportunities across Web3.
+                Join the future of decentralized credit and unlock better
+                lending opportunities across Web3.
               </p>
 
               <div className="flex flex-col gap-4 min-[400px]:flex-row animate-on-scroll opacity-0 translate-y-8 transition-all duration-1000 delay-400">
@@ -670,29 +753,29 @@ export default function BuilderScoreLanding() {
       </main>
 
       {/* Footer */}
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-gray-800/50 bg-[#0a0f1f]/90">
-        <p className="text-xs text-gray-400">© 2024 Builder Score. Built on Stellar. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link
-            href="#"
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-gray-800/50 bg-[#0a0f1f]/90 justify-center">
+        <p className="text-xs text-gray-400">
+          © 2024 Kredible. Built on Stellar. All rights reserved.
+        </p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6 items-center justify-center">
+          <a
+            href="https://api-kredible-production.up.railway.app/api/#/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs hover:underline underline-offset-4 text-gray-400 hover:text-blue-400 transition-colors"
           >
-            Terms of Service
-          </Link>
-          <Link
-            href="#"
+            API Docs
+          </a>
+          <a
+            href="https://github.com/Kredible-Inc"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-xs hover:underline underline-offset-4 text-gray-400 hover:text-blue-400 transition-colors"
           >
-            Privacy Policy
-          </Link>
-          <Link
-            href="#"
-            className="text-xs hover:underline underline-offset-4 text-gray-400 hover:text-blue-400 transition-colors"
-          >
-            Documentation
-          </Link>
+            GitHub
+          </a>
         </nav>
       </footer>
     </div>
-  )
+  );
 }
